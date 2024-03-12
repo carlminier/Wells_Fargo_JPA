@@ -10,8 +10,11 @@ import jakarta.persistence.Id;
 public class Portfolio {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue()
     private long portfolioId;
+
+    @ManyToOne
+    private Client client;
 
     @Column(nullable = false)
     private String creationDate;
@@ -20,12 +23,21 @@ public class Portfolio {
 
     }
 
-    public Advisor(String creationDate) {
+    public Portfolio(Client client, String creationDate) {
+        this.client = client;
         this.creationDate = creationDate;
     }
 
     public Long getPortfolioId() {
         return portfolioId;
+    }
+
+    public Client getCLient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public String getCreationDate() {
